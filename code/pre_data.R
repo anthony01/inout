@@ -8,7 +8,7 @@ ChooseHash <- function(algo) {
         MyDigest <- function (x) {
                 hash.x <- vector(mode = "character", length = length(x))
                 for (i in seq_along(x)) {
-                      hash.x[[i]] <- digest(as.character(x[[i]]), algo = algo)  
+                      hash.x[[i]] <- digest(as.character(x[[i]]), algo = algo)
                 }
                 hash.x
         }
@@ -24,7 +24,7 @@ CheckCollision <- function(factor.x, factor.y) {
 
 ReplaceName <- function(str.in) {
         # Replace normalized (shortened) names according to SUBST[ , 2]
-        
+
         str.out <- as.character(str.in)
         if (exists("SUBST")) {
                 i <- 1
@@ -39,11 +39,11 @@ ReplaceName <- function(str.in) {
                         }
                 }
         }
-        return(str.out) 
+        return(str.out)
 }
 
 ShorteName <- function(full_name3, mode = "short") {
-        
+
         name3       <- unlist(strsplit(as.character(full_name3), " +"))
         family_name <- paste(toupper(substr(name3[1], 1, 1)), substring(tolower(name3[1]), 2), sep = "")
         if (mode == "short") {
@@ -57,7 +57,7 @@ ShorteName <- function(full_name3, mode = "short") {
         return (short_name)
 }
 
-MakeIntervals <- function(x, ...) {        
+MakeIntervals <- function(x, ...) {
         y      <- data.frame()
         n.row  <- nrow(x)
         x.rec  <- 1
@@ -74,7 +74,7 @@ MakeIntervals <- function(x, ...) {
                         y[y.rec, "ddate"]     <- x[x.rec, "ddate"]
                         y[y.rec, "time0"]     <- x$times[x.rec]
                         y[y.rec, "time1"]     <- x$times[x.rec + 1]
-                        x.rec <- x.rec + 2   
+                        x.rec <- x.rec + 2
                         y.rec <- y.rec + 1
                 }
         }
@@ -168,7 +168,7 @@ club$emph <- MyHash(club$empl)
 emp       <- merge(emp, club[c("emph", "badge")], by = "emph", all.x = TRUE)
 emp       <- emp[order(emp$empl), ]
 emp$badge[is.na(emp$badge)] <- 0                                # In case new records appear in 'FILE.day'
-write.csv2(emp, file = FILE.mrk)                                # Update 'FILE.mrk' (add new records if any) 
+write.csv2(emp, file = FILE.mrk)                                # Update 'FILE.mrk' (add new records if any)
 emp       <- emp[emp$badge == 1, ]
 
 # Filter employees by "1C" list
@@ -178,7 +178,7 @@ y2 <- merge(emp[c("emph", "empl")], y2, by = "emph")            # CRM data
 
 # Redmine Data Preprocessing
 
-rd        <- read.csv2("../data/red_201412.csv")[c(1, 7, 8, 12, 19, 21, 20)]
+rd        <- read.csv2(FILE.red)[c(1, 7, 8, 12, 19, 21, 20)]
 names(rd) <- c("id", "job", "short.name", "ddate", "start.hour", "start.quater", "duration")
 rd$ddate  <- as.Date(rd$ddate, format = "%d.%m.%Y")
 rd        <- rd[(rd$ddate >= day.0 & rd$ddate <= day.1), ]      # Filter data for current month

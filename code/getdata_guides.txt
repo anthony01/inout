@@ -1,0 +1,12 @@
+1. 1C
+	Right click inside table
+	Select "Output list"
+	Output into: "Spreadsheet document"
+	Include first 6 visible columns
+	Save(Ctrl-S) to ods
+	DELETE LAST ROW
+	Convert to csv with ";" delimeter (using e.g. LibreOffice Calc)
+2. CRM
+	Press "FD button" then "yes" twice (saving to .xls)
+	Open .xls file with Excel and save to .ods
+	Convert to csv with ";" delimeter (using e.g. LibreOffice Calc)
